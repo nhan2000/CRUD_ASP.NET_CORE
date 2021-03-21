@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using Demo_Employee.Models;
 using System.Data;
 
+
 namespace Demo_Employee.Controllers
 {
     public class HomeController : Controller
     {
-        dbcs dbop = new dbcs();
+        db dbop = new db();
 
         string msg;
         public ActionResult Index()
@@ -19,21 +20,25 @@ namespace Demo_Employee.Controllers
             em.flag = "get";
             DataSet ds = dbop.Empget(em, out msg);
             List<Employee> list = new List<Employee>();
-            foreach(DataRow dr in ds.Tables[0].Rows)
+            foreach (DataRow dr in ds.Tables[0].Rows)
             {
                 list.Add(new Employee
                 {
                     Sr_no = Convert.ToInt32(dr["Sr_no"]),
                     Em_name = dr["Emp_name"].ToString(),
-                    City=dr["City"].ToString(),
-                    STATE=dr["State"].ToString(),
-                    Country=dr["cCountry"].ToString(),
-                    Department=dr["Department"].ToString()
+                    City = dr["City"].ToString(),
+                    STATE = dr["State"].ToString(),
+                    Country = dr["cCountry"].ToString(),
+                    Department = dr["Department"].ToString()
                 });
 
             }
 
             return View(list);
+        }
+        public IActionResult Create()
+        {
+            return (IActionResult)View();
         }
 
         
@@ -65,7 +70,8 @@ namespace Demo_Employee.Controllers
                 em.Sr_no = Convert.ToInt32(dr["Sr_no"]);
                 em.Em_name = dr["Em_name"].ToString();
                 em.City = dr["City"].ToString();
-                em.STATE = dr["Country"].ToString();
+                em.STATE = dr["State"].ToString();
+                em.Country = dr["Country"].ToString();
                 em.Department = dr["Department"].ToString();
             }
             return (IActionResult)View(em);

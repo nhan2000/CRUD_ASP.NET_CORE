@@ -8,9 +8,9 @@ using Demo_Employee.Models;
 
 namespace Demo_Employee.Models
 {
-    public class dbcs
+    public class db
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-A278NMV;Initial Catalog=DemoCRUD;User ID=san;Password=123456");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-A278NMV;Initial Catalog=DemoCRUD;User ID=san;Password=***********");
 
         public DataSet Empget(Employee emp, out string msg)
         {
@@ -22,11 +22,11 @@ namespace Demo_Employee.Models
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@Sr_no", emp.Sr_no);
                 com.Parameters.AddWithValue("@Em_name", emp.Em_name);
-                com.Parameters.AddWithValue("@Sr_no", emp.City);
-                com.Parameters.AddWithValue("@Sr_no", emp.STATE);
-                com.Parameters.AddWithValue("@Sr_no", emp.Country);
-                com.Parameters.AddWithValue("@Sr_no", emp.Department);
-                com.Parameters.AddWithValue("@Sr_no", emp.flag);
+                com.Parameters.AddWithValue("@City", emp.City);
+                com.Parameters.AddWithValue("@STATE", emp.STATE);
+                com.Parameters.AddWithValue("@Country", emp.Country);
+                com.Parameters.AddWithValue("@Department", emp.Department);
+                com.Parameters.AddWithValue("@flag", emp.flag);
                 SqlDataAdapter da = new SqlDataAdapter(com);
                 da.Fill(ds);
                 msg = "OK";
@@ -34,7 +34,8 @@ namespace Demo_Employee.Models
 
 
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 msg = ex.Message;
                 return ds;
             }
@@ -50,17 +51,18 @@ namespace Demo_Employee.Models
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@Sr_no", emp.Sr_no);
                 com.Parameters.AddWithValue("@Em_name", emp.Em_name);
-                com.Parameters.AddWithValue("@Sr_no", emp.City);
-                com.Parameters.AddWithValue("@Sr_no", emp.STATE);
-                com.Parameters.AddWithValue("@Sr_no", emp.Country);
-                com.Parameters.AddWithValue("@Sr_no", emp.Department);
-                com.Parameters.AddWithValue("@Sr_no", emp.flag);
+                com.Parameters.AddWithValue("@City", emp.City);
+                com.Parameters.AddWithValue("@STATE", emp.STATE);
+                com.Parameters.AddWithValue("@Country", emp.Country);
+                com.Parameters.AddWithValue("@Department", emp.Department);
+                com.Parameters.AddWithValue("@flag", emp.flag);
                 con.Open();
                 com.ExecuteNonQuery();
                 con.Close();
                 msg = "OK";
                 return msg;
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 if (con.State == ConnectionState.Open)
                 {
